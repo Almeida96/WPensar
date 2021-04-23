@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for compra_detalhe in lista_compra_detalhe %}
+    <div>
+        <h1>{{ compra_detalhe.produto }}</h1>
+        <p>Total gasto: {{ compra_detalhe.total_gasto }} | Valor médio: {{ compra_detalhe.valor_medio }}</p>
+        <div style="background-color: gray;">
+            {% for compra in compra_detalhe.compras %}
+            <p>{{ compra }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+{% endblock content %}
