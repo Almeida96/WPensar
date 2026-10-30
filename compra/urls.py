@@ -3,5 +3,6 @@ from .views import CompraCreateView, compras
 
 urlpatterns = [
     path("adicionar-compra/", CompraCreateView.as_view(), name="adicionar-compra"),
-    path("", compras, name="compras"),
+    path("compras/", compras, name="compras"),
+    path("", compras, name="home"),
 ]

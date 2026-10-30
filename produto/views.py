@@ -1,22 +1,20 @@
-from django.shortcuts import render
-from django.core.exceptions import ValidationError
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import IntegrityError, transaction
 from django.views.generic.edit import CreateView
+
+from .forms import ProdutoForm
 from .models import Produto
 
-class ProdutoCreateView(CreateView):
+
+class ProdutoCreateView(LoginRequiredMixin, CreateView):
     model = Produto
-    fields = ['nome']
-    success_url = '/adicionar-produto/'
+    form_class = ProdutoForm
+    success_url = "/adicionar-produto/"
 
-    def post(self, request, *args, **kwargs):
-        nome_requisicao = self.request.POST['nome']
-         
+    def form_valid(self, form):
         try:
-            tem_nome_repetido = Produto.objects.get(nome=nome_requisicao)
-
-            if tem_nome_repetido:
-                raise ValidationError('O produto já foi cadastrado', code='invalid')
-
-            return super(ProdutoCreateView, self).post(request)
-        except Produto.DoesNotExist:
-            return super(ProdutoCreateView, self).post(request)
+            with transaction.atomic():
+                return super().form_valid(form)
+        except IntegrityError:
+            form.add_error("nome", "This product already exists.")
+            return self.form_invalid(form)

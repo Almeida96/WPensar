@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('compra', '0001_initial'),
+        ("compra", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='compra',
-            name='quantidade',
+            model_name="compra",
+            name="quantidade",
             field=models.PositiveIntegerField(null=True),
         ),
     ]
