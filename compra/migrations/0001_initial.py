@@ -5,21 +5,34 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('produto', '0001_initial'),
+        ("produto", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Compra',
+            name="Compra",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantidade', models.IntegerField(null=True)),
-                ('preco', models.FloatField(null=True)),
-                ('produto', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='produto.produto')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("quantidade", models.IntegerField(null=True)),
+                ("preco", models.FloatField(null=True)),
+                (
+                    "produto",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="produto.produto",
+                    ),
+                ),
             ],
         ),
     ]

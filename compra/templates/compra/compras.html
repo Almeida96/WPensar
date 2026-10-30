@@ -1,14 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% for compra_detalhe in lista_compra_detalhe %}
-    <div>
-        <h1>{{ compra_detalhe.produto }}</h1>
-        <p>Total gasto: {{ compra_detalhe.total_gasto }} | Valor médio: {{ compra_detalhe.valor_medio }}</p>
-        <div style="background-color: gray;">
-            {% for compra in compra_detalhe.compras %}
-            <p>{{ compra }}</p>
-            {% endfor %}
-        </div>
-    </div>
-    {% endfor %}
-{% endblock content %}
+<h1>Purchase summary</h1>
+{% for row in lista_compra_detalhe %}
+<section><h2>{{ row.produto }}</h2>
+<p>{{ row.quantidade_total }} units · Total: {{ row.total_gasto|floatformat:2 }} · Weighted unit price: {{ row.valor_medio|floatformat:2 }}</p>
+<table><thead><tr><th scope="col">Purchase</th><th scope="col">Quantity</th><th scope="col">Unit price</th></tr></thead>
+<tbody>{% for purchase in row.compras %}<tr><td>{{ purchase.pk }}</td><td>{{ purchase.quantidade }}</td><td>{{ purchase.preco|floatformat:2 }}</td></tr>{% endfor %}</tbody></table>
+</section>{% empty %}<p>No purchases yet. Add a product, then record its first purchase.</p>{% endfor %}
+{% endblock %}

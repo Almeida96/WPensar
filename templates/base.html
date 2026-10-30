@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Document</title>
-</head>
-<body>
-    {% block content %}
-    {% endblock content %}
-</body>
-</html>
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WPensar · Purchase tracker</title>
+<style>
+body{font:17px/1.5 system-ui,sans-serif;max-width:960px;margin:40px auto;padding:0 20px;color:#20352d;background:#f7faf8}
+nav{display:flex;gap:20px;flex-wrap:wrap;border-bottom:1px solid #cbd8d0;padding-bottom:16px}
+a{color:#176246} main{padding-top:20px}input,select,button{font:inherit;padding:8px;max-width:100%;box-sizing:border-box}
+label{display:block}button{background:#176246;color:white;border:0;border-radius:5px}
+table{border-collapse:collapse;width:100%;margin:14px 0}th,td{text-align:left;padding:8px;border-bottom:1px solid #d6dfd9}
+.errorlist{color:#a32828}section{margin-bottom:32px} :focus-visible{outline:3px solid #c17a1c;outline-offset:3px}
+</style></head>
+<body><nav aria-label="Main navigation"><a href="{% url 'compras' %}">Purchases</a>
+<a href="{% url 'adicionar-produto' %}">Add product</a><a href="{% url 'adicionar-compra' %}">Add purchase</a></nav>
+<main>{% block content %}{% endblock %}</main></body></html>
